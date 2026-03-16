@@ -1,0 +1,8 @@
+anthropic==0.40.0
+streamlit==1.40.0
+scikit-learn==1.5.2
+pandas==2.2.3
+numpy==1.26.4
+mlflow==2.18.0
+python-dotenv==1.0.1
+pytest==8.3.3
