@@ -6,8 +6,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv()
 client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
-def load_file(path: str) -> str:
-    return Path(path).read_text(encoding="utf-8")
+def load_file(path: str | Path) -> str:
+    # If it's already a full Path object, use it.
+    # If it's a string, join it with BASE_DIR.
+    full_path = path if isinstance(path, Path) else BASE_DIR / path
+    return full_path.read_text(encoding="utf-8")
 
 def call_claude(prompt: str, model: str = "claude-haiku-4-5-20251001",
                 system: str = "", max_tokens: int = 1000) -> str:
