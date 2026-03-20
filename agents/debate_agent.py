@@ -58,8 +58,12 @@ Here is the full debate transcript:
 Now produce ONLY the final summary JSON as defined in the skill. No markdown, no extra text.
 """
     raw = call_claude(synthesis_prompt, model="claude-sonnet-4-6",
-                      system="Output only valid JSON.", max_tokens=600)
+                      system="Output only valid JSON.", max_tokens=1200)
     raw = raw.strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()
+
+
+    # print(f"DEBUG synthesis raw:\n{raw}\n")
+
     summary = json.loads(raw)
 
     debate_output = {"transcript": debate_turns, "summary": summary}
