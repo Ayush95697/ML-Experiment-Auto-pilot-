@@ -1,0 +1,15 @@
+{
+  "goal": "Optimize RandomForest hyperparameters on breast_cancer dataset to maximize accuracy",
+  "dataset": "breast_cancer",
+  "model": "RandomForest",
+  "primary_metric": "accuracy",
+  "n_configs": 5,
+  "failure_threshold": 0.9,
+  "constraints": [
+    "max 10 min training time per config",
+    "no GPU required",
+    "must report std error with accuracy scores",
+    "significance testing required before winner declaration"
+  ],
+  "output_format": "markdown report with metric table, std error, statistical significance test, and winner config with rationale"
+}

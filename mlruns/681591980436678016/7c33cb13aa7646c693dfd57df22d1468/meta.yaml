@@ -1,0 +1,14 @@
+artifact_uri: file:///C:\Users\Ayush\OneDrive\Desktop\ML Experiment AutoPilot/mlruns/681591980436678016/7c33cb13aa7646c693dfd57df22d1468/artifacts
+end_time: 1774087931089
+entry_point_name: ''
+experiment_id: '681591980436678016'
+lifecycle_stage: active
+run_id: 7c33cb13aa7646c693dfd57df22d1468
+run_name: aggressive_complexity
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774087931017
+status: 3
+tags: []
+user_id: Ayush

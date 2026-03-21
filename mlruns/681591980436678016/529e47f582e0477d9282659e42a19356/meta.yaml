@@ -1,0 +1,14 @@
+artifact_uri: file:///C:\Users\Ayush\OneDrive\Desktop\ML Experiment AutoPilot/mlruns/681591980436678016/529e47f582e0477d9282659e42a19356/artifacts
+end_time: 1774087933275
+entry_point_name: ''
+experiment_id: '681591980436678016'
+lifecycle_stage: active
+run_id: 529e47f582e0477d9282659e42a19356
+run_name: speed_optimised
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774087933206
+status: 3
+tags: []
+user_id: Ayush

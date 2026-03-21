@@ -1,0 +1,14 @@
+artifact_uri: file:///C:\Users\Ayush\OneDrive\Desktop\ML Experiment AutoPilot/mlruns/681591980436678016/86af46793d264e1bab887b0400181906/artifacts
+end_time: 1774087935461
+entry_point_name: ''
+experiment_id: '681591980436678016'
+lifecycle_stage: active
+run_id: 86af46793d264e1bab887b0400181906
+run_name: balanced_exploration
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774087935384
+status: 3
+tags: []
+user_id: Ayush

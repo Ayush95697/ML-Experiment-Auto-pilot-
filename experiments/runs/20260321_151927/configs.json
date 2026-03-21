@@ -1,0 +1,69 @@
+[
+  {
+    "config_id": 1,
+    "label": "conservative_baseline",
+    "framing": "Safe defaults, low risk",
+    "params": {
+      "n_estimators": 100,
+      "max_depth": 10,
+      "min_samples_split": 5,
+      "max_features": "sqrt",
+      "random_state": 42,
+      "n_jobs": -1
+    }
+  },
+  {
+    "config_id": 2,
+    "label": "aggressive_complexity",
+    "framing": "High model capacity, deep trees",
+    "params": {
+      "n_estimators": 500,
+      "max_depth": 25,
+      "min_samples_split": 2,
+      "max_features": "log2",
+      "random_state": 42,
+      "n_jobs": -1
+    }
+  },
+  {
+    "config_id": 3,
+    "label": "regularisation_focused",
+    "framing": "Prevent overfitting, shallow trees",
+    "params": {
+      "n_estimators": 200,
+      "max_depth": 5,
+      "min_samples_split": 20,
+      "max_features": "sqrt",
+      "min_samples_leaf": 4,
+      "random_state": 42,
+      "n_jobs": -1
+    }
+  },
+  {
+    "config_id": 4,
+    "label": "speed_optimised",
+    "framing": "Fast convergence, minimal trees",
+    "params": {
+      "n_estimators": 50,
+      "max_depth": 8,
+      "min_samples_split": 10,
+      "max_features": "sqrt",
+      "random_state": 42,
+      "n_jobs": -1
+    }
+  },
+  {
+    "config_id": 5,
+    "label": "creative_exploration",
+    "framing": "Random exploration of intermediate space",
+    "params": {
+      "n_estimators": 300,
+      "max_depth": 15,
+      "min_samples_split": 8,
+      "max_features": "log2",
+      "min_samples_leaf": 2,
+      "random_state": 42,
+      "n_jobs": -1
+    }
+  }
+]

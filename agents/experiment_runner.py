@@ -8,6 +8,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import StandardScaler
 import numpy as np
+import mlflow
 
 
 DATASETS = {
@@ -41,24 +42,37 @@ def run_single_config(config: dict, contract: dict) -> dict:
     X, y = load_dataset(contract["dataset"])
     scaler = StandardScaler()
     X = scaler.fit_transform(X)
-
     model = build_model(contract["model"], config["params"])
     metric = contract.get("primary_metric", "accuracy")
 
     start = time.time()
     scores = cross_val_score(model, X, y, cv=5, scoring=metric)
     elapsed = round(time.time() - start, 2)
+    mean_score = round(float(np.mean(scores)), 4)
+
+    # Fix MLflow path — always save to project root
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    mlflow.set_tracking_uri(f"file:///{BASE_DIR}/mlruns")   # ← add this line
+
+    mlflow.set_experiment(f"autopilot_{contract['dataset']}_{contract['model']}")
+    with mlflow.start_run(run_name=config["label"]):
+        mlflow.log_params(config["params"])
+        mlflow.log_param("config_id", config["config_id"])
+        mlflow.log_param("framing", config.get("framing", ""))
+        mlflow.log_metric(metric, mean_score)
+        mlflow.log_metric(f"{metric}_std", round(float(np.std(scores)), 4))
+        mlflow.log_metric("train_time_sec", elapsed)
 
     return {
         "config_id": config["config_id"],
         "label": config["label"],
         "params": config["params"],
         "metric": metric,
-        "mean_score": round(float(np.mean(scores)), 4),
-        "std_score":  round(float(np.std(scores)), 4),
-        "cv_scores":  [round(float(s), 4) for s in scores],
+        "mean_score": mean_score,
+        "std_score": round(float(np.std(scores)), 4),
+        "cv_scores": [round(float(s), 4) for s in scores],
         "train_time_sec": elapsed,
-        "passed_threshold": float(np.mean(scores)) >= contract.get("failure_threshold", 0.0)
+        "passed_threshold": mean_score >= contract.get("failure_threshold", 0.0)
     }
 
 def run_all_experiments(contract: dict, configs: list[dict]) -> dict:
@@ -98,12 +112,13 @@ def run_all_experiments(contract: dict, configs: list[dict]) -> dict:
     print(f"[Runner] Saved to: {run_dir}")
     return output, run_dir
 
-if __name__ == "__main__":
-    if __name__ == "__main__":
-        from agents.contract_agent import run_contract
-        from agents.config_agent import generate_configs
 
-        contract = run_contract("Test RandomForest on iris, optimize for accuracy")
-        configs = generate_configs(contract)
-        run_output, run_dir = run_all_experiments(contract, configs)
-        print(json.dumps(run_output, indent=2))
+if __name__ == "__main__":
+
+    from agents.contract_agent import run_contract
+    from agents.config_agent import generate_configs
+
+    contract = run_contract("Test RandomForest on iris, optimize for accuracy")
+    configs = generate_configs(contract)
+    run_output, run_dir = run_all_experiments(contract, configs)
+    print(json.dumps(run_output, indent=2))
