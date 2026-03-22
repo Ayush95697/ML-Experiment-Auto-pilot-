@@ -9,7 +9,8 @@ from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import StandardScaler
 import numpy as np
 import mlflow
-
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
 
 DATASETS = {
     "iris": load_iris,
@@ -21,12 +22,47 @@ MODELS = {
     "LogisticRegression": LogisticRegression,
 }
 
-def load_dataset(name: str):
-    loader = DATASETS.get(name.lower())
-    if not loader:
-        raise ValueError(f"Unknown dataset: {name}. Available: {list(DATASETS.keys())}")
-    data = loader()
-    return data.data, data.target
+def load_dataset(name: str, csv_path: str = None, target_column: str = None):
+    # Built-in sklearn dataset
+    if name.lower() in DATASETS:
+        loader = DATASETS[name.lower()]
+        data = loader()
+        return data.data, data.target
+
+    # CSV file — either from path or uploaded temp file
+    if csv_path:
+        df = pd.read_csv(csv_path)
+
+        if not target_column:
+            # Default: last column is the target
+            target_column = df.columns[-1]
+
+        if target_column not in df.columns:
+            raise ValueError(f"Column '{target_column}' not found. Available: {list(df.columns)}")
+
+        X = df.drop(columns=[target_column])
+
+        # Drop non-numeric columns automatically
+        non_numeric = X.select_dtypes(exclude=[np.number]).columns.tolist()
+        if non_numeric:
+            print(f"[Runner] Dropping non-numeric columns: {non_numeric}")
+            X = X.select_dtypes(include=[np.number])
+
+        # Encode target if it's a string
+        y = df[target_column]
+        if y.dtype == object:
+            le = LabelEncoder()
+            y = le.fit_transform(y)
+            print(f"[Runner] Encoded target classes: {list(le.classes_)}")
+
+        # Drop rows with missing values
+        mask = ~(X.isna().any(axis=1) | pd.isna(y))
+        X, y = X[mask].values, np.array(y)[mask]
+
+        print(f"[Runner] Loaded CSV: {X.shape[0]} rows, {X.shape[1]} features")
+        return X, y
+
+    raise ValueError(f"Unknown dataset: '{name}'. Use 'iris', 'breast_cancer', or provide a csv_path.")
 
 def build_model(model_name: str, params: dict):
     cls = MODELS.get(model_name)
@@ -39,7 +75,11 @@ def build_model(model_name: str, params: dict):
     return cls(**clean)
 
 def run_single_config(config: dict, contract: dict) -> dict:
-    X, y = load_dataset(contract["dataset"])
+        # Get csv_path from contract if provided
+    csv_path = contract.get("csv_path", None)
+    target_column = contract.get("target_column", None)
+
+    X, y = load_dataset(contract["dataset"], csv_path=csv_path, target_column=target_column)
     scaler = StandardScaler()
     X = scaler.fit_transform(X)
     model = build_model(contract["model"], config["params"])
