@@ -1,0 +1,116 @@
+{
+  "run_id": "20260322_163805",
+  "results": [
+    {
+      "config_id": 1,
+      "label": "conservative_baseline",
+      "params": {
+        "n_estimators": 100,
+        "max_depth": 10,
+        "min_samples_split": 10,
+        "max_features": "sqrt"
+      },
+      "metric": "accuracy",
+      "mean_score": 0.652,
+      "std_score": 0.0776,
+      "cv_scores": [
+        0.5,
+        0.68,
+        0.72,
+        0.68,
+        0.68
+      ],
+      "train_time_sec": 0.55,
+      "passed_threshold": false
+    },
+    {
+      "config_id": 2,
+      "label": "aggressive_complexity",
+      "params": {
+        "n_estimators": 500,
+        "max_depth": 20,
+        "min_samples_split": 2,
+        "max_features": "log2"
+      },
+      "metric": "accuracy",
+      "mean_score": 0.6043,
+      "std_score": 0.0911,
+      "cv_scores": [
+        0.4615,
+        0.68,
+        0.72,
+        0.6,
+        0.56
+      ],
+      "train_time_sec": 2.53,
+      "passed_threshold": false
+    },
+    {
+      "config_id": 3,
+      "label": "regularisation_focused",
+      "params": {
+        "n_estimators": 150,
+        "max_depth": 5,
+        "min_samples_split": 20,
+        "max_features": "sqrt"
+      },
+      "metric": "accuracy",
+      "mean_score": 0.6443,
+      "std_score": 0.0927,
+      "cv_scores": [
+        0.4615,
+        0.68,
+        0.72,
+        0.68,
+        0.68
+      ],
+      "train_time_sec": 0.79,
+      "passed_threshold": false
+    },
+    {
+      "config_id": 4,
+      "label": "speed_optimised",
+      "params": {
+        "n_estimators": 50,
+        "max_depth": 8,
+        "min_samples_split": 8,
+        "max_features": "log2"
+      },
+      "metric": "accuracy",
+      "mean_score": 0.6203,
+      "std_score": 0.0852,
+      "cv_scores": [
+        0.4615,
+        0.68,
+        0.6,
+        0.68,
+        0.68
+      ],
+      "train_time_sec": 0.28,
+      "passed_threshold": false
+    },
+    {
+      "config_id": 5,
+      "label": "creative_exploration",
+      "params": {
+        "n_estimators": 200,
+        "max_depth": 12,
+        "min_samples_split": 5,
+        "max_features": "sqrt"
+      },
+      "metric": "accuracy",
+      "mean_score": 0.644,
+      "std_score": 0.0763,
+      "cv_scores": [
+        0.5,
+        0.68,
+        0.72,
+        0.68,
+        0.64
+      ],
+      "train_time_sec": 1.07,
+      "passed_threshold": false
+    }
+  ],
+  "winner_config_id": 1
+}

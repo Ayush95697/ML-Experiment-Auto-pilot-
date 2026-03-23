@@ -1,0 +1,57 @@
+[
+  {
+    "config_id": 1,
+    "label": "conservative_baseline",
+    "framing": "Safe defaults, low risk",
+    "params": {
+      "n_estimators": 100,
+      "max_depth": 10,
+      "min_samples_split": 10,
+      "max_features": "sqrt"
+    }
+  },
+  {
+    "config_id": 2,
+    "label": "aggressive_complexity",
+    "framing": "High complexity, aggressive fitting",
+    "params": {
+      "n_estimators": 500,
+      "max_depth": 20,
+      "min_samples_split": 2,
+      "max_features": "log2"
+    }
+  },
+  {
+    "config_id": 3,
+    "label": "regularisation_focused",
+    "framing": "Prevent overfitting with strong constraints",
+    "params": {
+      "n_estimators": 150,
+      "max_depth": 5,
+      "min_samples_split": 20,
+      "max_features": "sqrt"
+    }
+  },
+  {
+    "config_id": 4,
+    "label": "speed_optimised",
+    "framing": "Fast convergence with moderate complexity",
+    "params": {
+      "n_estimators": 50,
+      "max_depth": 8,
+      "min_samples_split": 8,
+      "max_features": "log2"
+    }
+  },
+  {
+    "config_id": 5,
+    "label": "creative_exploration",
+    "framing": "Random creative exploration of middle ground",
+    "params": {
+      "n_estimators": 200,
+      "max_depth": 12,
+      "min_samples_split": 5,
+      "max_features": "sqrt"
+    }
+  }
+]

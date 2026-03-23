@@ -1,0 +1,10 @@
+{
+  "goal": "Optimise LogisticRegression on titanic for accuracy",
+  "dataset": "titanic",
+  "model": "LogisticRegression",
+  "primary_metric": "accuracy",
+  "n_configs": 5,
+  "failure_threshold": 0.85,
+  "csv_path": "C:\\Users\\Ayush\\AppData\\Local\\Temp\\tmpf73d5o0i.csv",
+  "target_column": "Survived"
+}

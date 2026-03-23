@@ -1,0 +1,116 @@
+{
+  "run_id": "20260322_165411",
+  "results": [
+    {
+      "config_id": 1,
+      "label": "conservative_baseline",
+      "params": {
+        "C": 1.0,
+        "solver": "lbfgs",
+        "max_iter": 100,
+        "penalty": "l2"
+      },
+      "metric": "accuracy",
+      "mean_score": 0.6846,
+      "std_score": 0.1341,
+      "cv_scores": [
+        0.4231,
+        0.8,
+        0.72,
+        0.76,
+        0.72
+      ],
+      "train_time_sec": 0.07,
+      "passed_threshold": false
+    },
+    {
+      "config_id": 2,
+      "label": "aggressive_learning",
+      "params": {
+        "C": 10.0,
+        "solver": "lbfgs",
+        "max_iter": 500,
+        "penalty": "l2"
+      },
+      "metric": "accuracy",
+      "mean_score": 0.6846,
+      "std_score": 0.1341,
+      "cv_scores": [
+        0.4231,
+        0.8,
+        0.72,
+        0.76,
+        0.72
+      ],
+      "train_time_sec": 0.02,
+      "passed_threshold": false
+    },
+    {
+      "config_id": 3,
+      "label": "regularisation_focused",
+      "params": {
+        "C": 0.1,
+        "solver": "lbfgs",
+        "max_iter": 200,
+        "penalty": "l2"
+      },
+      "metric": "accuracy",
+      "mean_score": 0.7065,
+      "std_score": 0.0305,
+      "cv_scores": [
+        0.6923,
+        0.76,
+        0.72,
+        0.68,
+        0.68
+      ],
+      "train_time_sec": 0.02,
+      "passed_threshold": false
+    },
+    {
+      "config_id": 4,
+      "label": "speed_optimised",
+      "params": {
+        "C": 1.0,
+        "solver": "liblinear",
+        "max_iter": 50,
+        "penalty": "l2"
+      },
+      "metric": "accuracy",
+      "mean_score": 0.6846,
+      "std_score": 0.1341,
+      "cv_scores": [
+        0.4231,
+        0.8,
+        0.72,
+        0.76,
+        0.72
+      ],
+      "train_time_sec": 0.01,
+      "passed_threshold": false
+    },
+    {
+      "config_id": 5,
+      "label": "elastic_exploration",
+      "params": {
+        "C": 0.5,
+        "solver": "saga",
+        "max_iter": 300,
+        "penalty": "l1"
+      },
+      "metric": "accuracy",
+      "mean_score": 0.6757,
+      "std_score": 0.0748,
+      "cv_scores": [
+        0.5385,
+        0.76,
+        0.72,
+        0.68,
+        0.68
+      ],
+      "train_time_sec": 0.01,
+      "passed_threshold": false
+    }
+  ],
+  "winner_config_id": 3
+}

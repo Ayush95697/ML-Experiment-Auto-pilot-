@@ -1,0 +1,7 @@
+artifact_location: file:///C:\Users\Ayush\OneDrive\Desktop\ML Experiment AutoPilot/mlruns/925716902767134727
+creation_time: 1774177686511
+experiment_id: '925716902767134727'
+last_update_time: 1774177686511
+lifecycle_stage: active
+name: autopilot_titanic_RandomForest
+workspace: default

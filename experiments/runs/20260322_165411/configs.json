@@ -1,0 +1,57 @@
+[
+  {
+    "config_id": 1,
+    "label": "conservative_baseline",
+    "framing": "Safe defaults, low risk",
+    "params": {
+      "C": 1.0,
+      "solver": "lbfgs",
+      "max_iter": 100,
+      "penalty": "l2"
+    }
+  },
+  {
+    "config_id": 2,
+    "label": "aggressive_learning",
+    "framing": "High complexity, aggressive regularization inverse",
+    "params": {
+      "C": 10.0,
+      "solver": "lbfgs",
+      "max_iter": 500,
+      "penalty": "l2"
+    }
+  },
+  {
+    "config_id": 3,
+    "label": "regularisation_focused",
+    "framing": "Strong regularization to prevent overfitting",
+    "params": {
+      "C": 0.1,
+      "solver": "lbfgs",
+      "max_iter": 200,
+      "penalty": "l2"
+    }
+  },
+  {
+    "config_id": 4,
+    "label": "speed_optimised",
+    "framing": "Fast convergence with liblinear solver",
+    "params": {
+      "C": 1.0,
+      "solver": "liblinear",
+      "max_iter": 50,
+      "penalty": "l2"
+    }
+  },
+  {
+    "config_id": 5,
+    "label": "elastic_exploration",
+    "framing": "L1 regularization with moderate complexity",
+    "params": {
+      "C": 0.5,
+      "solver": "saga",
+      "max_iter": 300,
+      "penalty": "l1"
+    }
+  }
+]

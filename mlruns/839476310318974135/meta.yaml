@@ -1,0 +1,7 @@
+artifact_location: file:///C:\Users\Ayush\OneDrive\Desktop\ML Experiment AutoPilot/mlruns/839476310318974135
+creation_time: 1774178651098
+experiment_id: '839476310318974135'
+last_update_time: 1774178651098
+lifecycle_stage: active
+name: autopilot_titanic_LogisticRegression
+workspace: default

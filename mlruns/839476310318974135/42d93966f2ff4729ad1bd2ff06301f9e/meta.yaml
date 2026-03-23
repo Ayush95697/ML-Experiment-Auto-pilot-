@@ -1,0 +1,14 @@
+artifact_uri: file:///C:\Users\Ayush\OneDrive\Desktop\ML Experiment AutoPilot/mlruns/839476310318974135/42d93966f2ff4729ad1bd2ff06301f9e/artifacts
+end_time: 1774178651416
+entry_point_name: ''
+experiment_id: '839476310318974135'
+lifecycle_stage: active
+run_id: 42d93966f2ff4729ad1bd2ff06301f9e
+run_name: regularisation_focused
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774178651343
+status: 3
+tags: []
+user_id: Ayush

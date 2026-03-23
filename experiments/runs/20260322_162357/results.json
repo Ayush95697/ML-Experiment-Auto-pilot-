@@ -1,0 +1,26 @@
+{
+  "run_id": "20260322_162357",
+  "results": [
+    {
+      "config_id": 1,
+      "error": "Found array with 0 feature(s) (shape=(156, 0)) while a minimum of 1 is required by StandardScaler."
+    },
+    {
+      "config_id": 2,
+      "error": "Found array with 0 feature(s) (shape=(156, 0)) while a minimum of 1 is required by StandardScaler."
+    },
+    {
+      "config_id": 3,
+      "error": "Found array with 0 feature(s) (shape=(156, 0)) while a minimum of 1 is required by StandardScaler."
+    },
+    {
+      "config_id": 4,
+      "error": "Found array with 0 feature(s) (shape=(156, 0)) while a minimum of 1 is required by StandardScaler."
+    },
+    {
+      "config_id": 5,
+      "error": "Found array with 0 feature(s) (shape=(156, 0)) while a minimum of 1 is required by StandardScaler."
+    }
+  ],
+  "winner_config_id": null
+}

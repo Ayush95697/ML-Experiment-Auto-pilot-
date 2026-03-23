@@ -31,7 +31,7 @@ def load_dataset(name: str, csv_path: str = None, target_column: str = None):
 
     # CSV file — either from path or uploaded temp file
     if csv_path:
-        df = pd.read_csv(csv_path)
+        df = pd.read_csv(csv_path, sep=None, engine="python")
 
         if not target_column:
             # Default: last column is the target

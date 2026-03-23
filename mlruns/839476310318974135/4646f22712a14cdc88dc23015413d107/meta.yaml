@@ -1,0 +1,14 @@
+artifact_uri: file:///C:\Users\Ayush\OneDrive\Desktop\ML Experiment AutoPilot/mlruns/839476310318974135/4646f22712a14cdc88dc23015413d107/artifacts
+end_time: 1774178651306
+entry_point_name: ''
+experiment_id: '839476310318974135'
+lifecycle_stage: active
+run_id: 4646f22712a14cdc88dc23015413d107
+run_name: aggressive_learning
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774178651227
+status: 3
+tags: []
+user_id: Ayush

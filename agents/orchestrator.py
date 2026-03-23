@@ -19,12 +19,15 @@ def update_agents_md(new_rule: str):
         path.write_text(updated, encoding="utf-8")
 
 
-def generate_learned_rule(review: dict, debate: dict, contract: dict):
-    if review.get("verdict") != "needs_revision" and not debate.get("summary", {}).get("outlier_insight"):
-        return None
+def generate_learned_rule(review: dict, debate: dict, contract: dict) -> str | None:
+    """Ask Claude to write a rule in the standard format based on this run's findings."""
+    if review.get("verdict") != "needs_revision" and not debate.get("summary",{}).get("outlier_insight"):
+        return None  # Nothing to learn this session
+
+    from agents.base import call_claude
     prompt = f"""
-Based on these findings from an ML experiment run, write ONE new rule for the
-agent's memory file. Format: [Category] Never/Always do X because Y.
+Based on these findings from an ML experiment run, write ONE new rule for the agent's
+memory file. Format: [Category] Never/Always do X because Y.
 Keep it under 20 words. Be specific to ML experiments.
 
 Verifier critical issues: {review.get('critical', [])}
@@ -34,6 +37,12 @@ Model used: {contract.get('model')}
     rule = call_claude(prompt, model="claude-haiku-4-5-20251001",
                        system="Output ONLY the rule. One line. No explanation.")
     return rule.strip()
+
+# In run_autopilot(), replace the update block with:
+rule = generate_learned_rule(review, debate, contract)
+if rule:
+    update_agents_md(rule)
+    print(f"\n[Memory] New rule learned: {rule}")
 
 
 def run_autopilot(user_request: str = None):
