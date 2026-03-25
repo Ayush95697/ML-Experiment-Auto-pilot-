@@ -13,7 +13,8 @@ st.title("ML Experiment AutoPilot")
 st.caption("Multi-agent hyperparameter search with debate + verification")
 
 BASE_DIR = Path(__file__).resolve().parent
-is_local = os.environ.get("STREAMLIT_SERVER_HEADLESS") != "true"
+is_local = os.environ.get("IS_STREAMLIT_CLOUD") != "true"
+
 
 # ── Sidebar ───────────────────────────────────────────────
 with st.sidebar:
