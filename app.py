@@ -3,6 +3,7 @@ import json
 import tempfile
 import pandas as pd
 from pathlib import Path
+import os
 
 st.set_page_config(page_title="ML Experiment AutoPilot", layout="wide")
 st.title("ML Experiment AutoPilot")
@@ -102,27 +103,67 @@ with st.sidebar:
     run_btn = st.button("Run AutoPilot", type="primary",
                         use_container_width=True, disabled=not ready)
     st.divider()
+    st.subheader("Run history")
+
+    BASE_DIR = Path(__file__).resolve().parent
+    runs_dir = BASE_DIR / "experiments" / "runs"
+
+    if runs_dir.exists():
+        run_folders = sorted(runs_dir.iterdir(), reverse=True)
+        history = []
+
+        for folder in run_folders:
+            results_file = folder / "results.json"
+            contract_file = folder / "contract.json"
+            if results_file.exists() and contract_file.exists():
+                results = json.loads(results_file.read_text())
+                contract = json.loads(contract_file.read_text())
+                valid = [r for r in results["results"] if "mean_score" in r]
+                if valid:
+                    best = max(valid, key=lambda r: r["mean_score"])
+                    history.append({
+                        "run_id": folder.name,
+                        "dataset": contract.get("dataset", "—"),
+                        "model": contract.get("model", "—"),
+                        "metric": contract.get("primary_metric", "—"),
+                        "best_score": best["mean_score"],
+                        "best_config": best["label"],
+                        "configs_tested": len(valid)
+                    })
+
+        if history:
+            import pandas as pd
+
+            df_history = pd.DataFrame(history)
+            st.dataframe(df_history, use_container_width=True)
+        else:
+            st.caption("No runs yet — run an experiment to see history here")
+
     st.caption("MLflow experiment tracker")
 
     mlflow_port = st.number_input("MLflow port", value=5000, step=1)
 
-    if st.button("Open MLflow UI", use_container_width=True):
-        import subprocess, sys
+    is_local = os.environ.get("STREAMLIT_SHARING") is None
+
+    if is_local:
+        if st.button("Open MLflow UI", use_container_width=True):
+
+            import subprocess, sys
 
         # Start mlflow ui as background process
-        BASE_DIR = Path(__file__).resolve().parent
-        subprocess.Popen(
-            [sys.executable, "-m", "mlflow", "ui",
-             "--backend-store-uri", str(BASE_DIR / "mlruns"),
-             "--port", str(int(mlflow_port))],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL
-        )
-        import time
+            BASE_DIR = Path(__file__).resolve().parent
+            subprocess.Popen(
+                [sys.executable, "-m", "mlflow", "ui",
+                "--backend-store-uri", str(BASE_DIR / "mlruns"),
+                "--port", str(int(mlflow_port))],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL
+            )
+            import time
 
-        time.sleep(2)  # give it 2 seconds to start
-        st.success(f"MLflow running at:")
-        st.markdown(f"[http://localhost:{int(mlflow_port)}](http://localhost:{int(mlflow_port)})")
+            time.sleep(2)  # give it 2 seconds to start
+            st.success(f"MLflow running at:")
+            st.markdown(f"[http://localhost:{int(mlflow_port)}](http://localhost:{int(mlflow_port)})")
 
 # ── Main area — status metrics ────────────────────────────
 col1, col2, col3 = st.columns(3)
