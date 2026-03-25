@@ -2,8 +2,10 @@ import anthropic, os
 from dotenv import load_dotenv
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
+import streamlit as st
 
 load_dotenv()
+os.environ["ANTHROPIC_API_KEY"] = st.secrets["ANTHROPIC_API_KEY"]
 client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
 def load_file(path: str | Path) -> str:
